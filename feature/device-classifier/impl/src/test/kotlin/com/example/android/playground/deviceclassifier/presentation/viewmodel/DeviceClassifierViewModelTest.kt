@@ -4,7 +4,6 @@ import app.cash.turbine.test
 import com.example.android.playground.core.testing.MainDispatcherRule
 import com.example.android.playground.deviceclassifier.domain.model.DeviceSpec
 import com.example.android.playground.deviceclassifier.domain.model.DeviceTier
-import com.example.android.playground.deviceclassifier.domain.usecase.ComputeDeviceTierUseCase
 import com.example.android.playground.deviceclassifier.domain.usecase.GetDeviceSpecUseCase
 import com.example.android.playground.deviceclassifier.presentation.intent.DeviceClassifierIntent
 import com.example.android.playground.deviceclassifier.presentation.sideeffect.DeviceClassifierSideEffect
@@ -23,12 +22,9 @@ class DeviceClassifierViewModelTest {
 
     private val getDeviceSpec: GetDeviceSpecUseCase = mockk()
 
-    // Real instance — pure logic, no Android deps
-    private val computeDeviceTier = ComputeDeviceTierUseCase()
-
     private val testSpec = DeviceSpec(ramMb = 6_144L, cpuCores = 8, apiLevel = 33)
 
-    private fun createViewModel() = DeviceClassifierViewModel(getDeviceSpec, computeDeviceTier)
+    private fun createViewModel() = DeviceClassifierViewModel(getDeviceSpec)
 
     @Test
     fun `init loads device spec and updates state`() =
